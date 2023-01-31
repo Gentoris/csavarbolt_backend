@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param} from '@nestjs/common';
 import { Screw } from './screw.entity';
 import { ScrewService } from './app.service';
 
@@ -14,6 +14,11 @@ export class ScrewController {
   @Post()
   create(@Body() screw: Screw): Promise<void> {
     return this.screwService.create(screw);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: number): Promise<void> {
+    await this.screwService.delete(id);
   }
 }
 

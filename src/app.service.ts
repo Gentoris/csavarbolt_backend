@@ -5,6 +5,9 @@ import { Screw } from './screw.entity';
 
 @Injectable()
 export class ScrewService {
+  delete(id: number) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Screw)
     private readonly screwRepository: Repository<Screw>,
