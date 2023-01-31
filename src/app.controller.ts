@@ -1,17 +1,19 @@
-import { Body, Controller, Get, Post, Render } from '@nestjs/common';
-import { DataSource } from 'typeorm';
-import { AppService } from './app.service';
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Screw } from './screw.entity';
+import { ScrewService } from './app.service';
 
-@Controller()
-export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private dataSource: DataSource,
-  ) {}
+@Controller('screws')
+export class ScrewController {
+  constructor(private readonly screwService: ScrewService) {}
 
   @Get()
-  @Render('index')
-  index() {
-    return { message: 'Welcome to the homepage' };
+  findAll(): Promise<Screw[]> {
+    return this.screwService.findAll();
+  }
+
+  @Post()
+  create(@Body() screw: Screw): Promise<void> {
+    return this.screwService.create(screw);
   }
 }
+
